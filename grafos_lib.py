@@ -1,4 +1,4 @@
-class Grafo:
+class Lista_Grafo:
     def __init__(self, num_vertices: int):
         
         self.n = num_vertices
@@ -137,4 +137,5 @@ class Grafo:
             for i, componente in enumerate(componentes):
                 f.write(f"Componente {i} — tamanho {len(componente)}\n")
                 f.write("Vértices: " + " ".join(map(str, componente)) + "\n\n")
+
 
