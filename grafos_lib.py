@@ -1,20 +1,23 @@
+import sys
+import numpy as np
+
 class Lista_Grafo:
     def __init__(self, num_vertices: int):
         
         self.n = num_vertices
-        self.adj = {i: [] for i in range(num_vertices)}
+        self.adj = {i: [] for i in range(num_vertices + 1)}
         self.num_arestas = 0
 
     # Leitura do arquivo: Lembrar de definir o nome do arquivo
 
     @staticmethod
-    def from_file(arquivo: str):
+    def ler_de_arquivo(arquivo: str):
         
         with open(arquivo, "r") as f:
             linhas = f.read().strip().split("\n")
 
         n = int(linhas[0])
-        grafo = Grafo(n)
+        grafo = Lista_Grafo(n)
 
         for linha in linhas[1:]:
             if linha.strip() == "":
@@ -124,7 +127,7 @@ class Lista_Grafo:
             if not visitado[v]:
                 componente = []
                 dfs_coletar(v, componente)
-                componente.append(componente)
+                componentes.append(componente)
 
         return componentes
 
@@ -140,3 +143,17 @@ class Lista_Grafo:
 
 
 
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Uso correto:")
+        print("python3 main.py arquivo_entrada.txt")
+        sys.exit(1)
+    
+    texto_entrada = sys.argv[1]
+    grafo = Lista_Grafo.from_file(texto_entrada)
+    resumo_saida = "resumo_grafo.txt"
+    grafo.save_resumo(resumo_saida)
+    print(f"Resumo do grafo salvo em '{resumo_saida}'")
+
+    
